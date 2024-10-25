@@ -1,13 +1,13 @@
 {
-  "name": "student-portal-server",
+  "name": "thoughthub-library-server",
   "version": "1.0.0",
-  "description": "student portal-server",
+  "description": "ThoughtHub Library Management Sever made by @ashikurrb",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
-    "client": "npm start --prefix ./student-portal",
+    "client": "npm start --prefix ./library-management-client",
     "dev": "concurrently \"npm run client\" \"npm run server\""
   },
   "keywords": [],

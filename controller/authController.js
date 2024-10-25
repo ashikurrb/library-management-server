@@ -1,7 +1,4 @@
 import userModel from '../models/userModel.js'
-import paymentModel from '../models/paymentModel.js';
-import resultModel from '../models/resultModel.js';
-import orderModel from '../models/orderModel.js';
 import otpModel from '../models/otpModel.js';
 import { comparePassword, hashPassword } from '../helpers/authHelper.js'
 import JWT from 'jsonwebtoken'
@@ -548,9 +545,6 @@ export const deleteUserController = async (req, res) => {
 
         await Promise.all([
             userModel.findByIdAndDelete(id),
-            paymentModel.deleteMany({ user: id }),
-            resultModel.deleteMany({ user: id }),
-            orderModel.deleteMany({ buyer: id }),
             publicId ? cloudinary.uploader.destroy(publicId) : null,
         ]);
         res.status(200).send({
