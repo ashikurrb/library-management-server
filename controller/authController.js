@@ -414,25 +414,6 @@ export const getAllUsersController = async (req, res) => {
     }
 };
 
-//update user's grade controller
-export const updateUserGradeController = async (req, res) => {
-    try {
-        const { grade } = req.fields;
-        const updatedUserGrade = await userModel.findByIdAndUpdate(req.params.id, { ...req.fields }, { new: true })
-        res.status(201).send({
-            success: true,
-            message: "Users grade updated successfully",
-        });
-    } catch (error) {
-        console.log(error);
-        res.status(500).send({
-            success: false,
-            message: "Error updating users grade",
-            error
-        })
-    }
-}
-
 //update user's status controller
 export const updateUserStatusController = async (req, res) => {
     try {
@@ -510,13 +491,13 @@ export const updateUserProfileController = async (req, res) => {
             // If the user has an old avatar, delete it first
             if (user.avatar) {
                 const publicId = user.avatar.split('/').pop().split('.')[0];
-                await cloudinary.uploader.destroy(`5points-student-portal/avatar/${publicId}`);
+                await cloudinary.uploader.destroy(`ThoughtHub-Library/avatar/${publicId}`);
             }
 
             try {
                 // Photo Upload to Cloudinary
                 const result = await cloudinary.uploader.upload(file.path, {
-                    folder: '5points-student-portal/avatar',
+                    folder: 'ThoughtHub-Library/avatar',
                 });
                 // Update the user's photo URL in the database
                 user.avatar = result.secure_url;
@@ -562,7 +543,7 @@ export const deleteUserController = async (req, res) => {
         // Extract public_id from the Cloudinary URL
         const avatarUrl = user.avatar;
         const publicId = avatarUrl
-            ? '5points-student-portal/avatar/' + avatarUrl.split('/').pop().split('.')[0]
+            ? 'ThoughtHub-Library/avatar/' + avatarUrl.split('/').pop().split('.')[0]
             : null;
 
         await Promise.all([
