@@ -6,6 +6,10 @@ const bookSchema = new mongoose.Schema({
         require: true,
         unique: true,
     },
+    uniqueId: {
+        type: String,
+        require: true,
+    },
     slug: {
         type: String,
         lowercase: true,
@@ -25,8 +29,12 @@ const bookSchema = new mongoose.Schema({
         type: Number,
         require: true,
     },
-    boughtPrice: {
+    buyingPrice: {
         type: Number,
+        require: true,
+    },
+    buyingDate: {
+        type: Date,
         require: true,
     },
     publishDate: {
@@ -64,11 +72,17 @@ const bookSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
-    goodreadsUrl: {
+    goodReadsUrl: {
         type: String,
     },
     bookCoverPhoto: {
         type: String,
+        require: true,
+    },
+    bookStatus: {
+        type: String,
+        default: "In Stock",
+        enum: ["In Stock", "Borrowed", "Lost", "Sold", "Gifted"],
         require: true,
     },
 }, { timestamps: true })
